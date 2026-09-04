@@ -24,8 +24,16 @@ class Library:
         print("---------------------------\n")
 
     def borrow_book(self, title):
-        pass
-    
+        for book in self.books:
+            if book.title == title:
+                if not book.is_borrowed:
+                    book.is_borrowed = True
+                    print(f"Successfully borrowed: '{book.title}'.")
+                else:
+                    print(f"Sorry, '{book.title}' is already borrowed.")
+                return
+
+        print(f"Error: '{title}' was not found in the library.")
 
 if __name__ == "__main__":
     my_library = Library("City Central Library")
@@ -37,3 +45,9 @@ if __name__ == "__main__":
     my_library.add_book(book2)
     
     my_library.list_books()
+    
+    my_library.borrow_book("1984")
+    my_library.list_books()
+
+    my_library.borrow_book("1984")
+    my_library.borrow_book("Harry Potter")
